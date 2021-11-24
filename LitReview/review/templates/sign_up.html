@@ -1,0 +1,18 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'LitReview/style.css' %}">
+    <meta charset="UTF-8">
+    <title>sign_up</title>
+</head>
+<body>
+    <div class="sign-up-container">
+        <h3 class="feed_title">Create an account</h3>
+        <form method="POST" action="{% url 'sign_up_process' %}" class='small-form'>
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" class="btn btn-center" value="Sign In">
+        </form>
+    </div>
+</body>
+</html>

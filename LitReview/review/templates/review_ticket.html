@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'LitReview/style.css' %}">
+    <title>Review_ticket</title>
+</head>
+<body>
+    <h1 class='title'>Lit Review</h1>
+    <ul class='nav'>
+        <li class='puce_nav'><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class='puce_nav'><a href="{% url 'my_post' %}">Post</a></li>
+        <li class='puce_nav'><a href="{% url 'subscription' %}">Subscription</a></li>
+        <li class='puce_nav'><a href="{% url 'logout_process' %}">Logout</a></li>
+
+        
+    </ul>
+    
+</body>
+</html>

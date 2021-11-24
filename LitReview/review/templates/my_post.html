@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'LitReview/style.css' %}">
+    <title>My Post</title>
+</head>
+<body>
+    
+    <ul class='nav_container'>
+        <li class='puce_nav'><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class='puce_nav'><a href="{% url 'my_post' %}">Post</a></li>
+        <li class='puce_nav'><a href="{% url 'subscription' %}">Subscription</a></li>
+        <li class='puce_nav'><a href="{% url 'logout_process' %}">Logout</a></li>
+    </ul>
+    <h1>Lit Review</h1>
+    <h3 class="feed_title">My Post</h3>
+    <div class="feed_container">
+        {% if post_list %}
+            <ul>
+                {% for post in post_list %}
+                    {% if post.TYPE == 'ticket' %}
+                        <li class="post_container">
+                            <div class="post_head">
+                                <p>{{ post.user.username }} asked for a review</p>
+                                <p>{{ post.time_created }}</p>
+                            </div>
+                            <p class='ticket_title'>{{ post.title }}</h3>
+                            <p class='ticket_description'>{{ post.description }}</p>
+                            <img src="../media/{{ MEDIA_URL }}{{ post.image }}" alt="">
+                            <div class="btn-container">
+                                <a href="/review/modify_post/{{ post.TYPE }}/{{ post.id }}"> <button class="btn btn-set">Modify</button> </a>
+                                <a href="/review/delete_post_process/{{ post.TYPE }}/{{ post.id }}"> <button class="btn btn-set">Delete</button> </a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="post_container">
+                            <div class="post_head">
+                                <p>{{ post.ticket.user.username }} asked for a review</p>
+                                <p>{{ post.time_created }}</p>
+                            </div>
+                            <p class='ticket_title'>{{ post.ticket.title }}</h3>
+                            <p class='ticket_description'>{{ post.ticket.description }}</p>
+                            <img src="../media/{{ MEDIA_URL }}{{ post.ticket.image }}" alt="">  
+                            <div>
+                                <div>
+                                    <p>{{ post.user.username }} Posted the review</p>
+                                    <p>{{ post.time_created }}</p>
+                                </div>
+                                <p>{{ post.headline }}</p>
+                                <p>{{ post.body }}</p>
+                                <p>rating : {{ post.rating }}</p>
+                            </div>
+                            <div class="btn-container">
+                                <a href="/review/modify_post/{{ post.TYPE }}/{{ post.id }}"> <button class="btn btn-set">Modify</button> </a>
+                                <a href="/review/delete_post_process/{{ post.TYPE }}/{{ post.id }}"> <button class="btn btn-set">Delete</button> </a>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

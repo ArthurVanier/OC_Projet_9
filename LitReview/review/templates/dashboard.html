@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'LitReview/style.css' %}">
+</head>
+<body>
+    
+    <ul class="nav_container">
+        <li class='puce_nav'><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class='puce_nav'><a href="{% url 'my_post' %}">Post</a></li>
+        <li class='puce_nav'><a href="{% url 'subscription' %}">Subscription</a></li>
+        <li class='puce_nav'><a href="{% url 'logout_process' %}">Logout</a></li>
+    </ul>
+    <h1>Lit Review</h1>
+    <section> 
+        <a href="{% url 'create_ticket' %}"><button class="btn">Create Ticket</button></a>
+        <a href="/review/create_review/-1"><button class="btn">Create Review</button></a>
+    </section>
+    <h3 class="feed_title">Recent post</h3>
+    <div class="feed_container">
+        {% if post_list %}
+            <ul>
+            {% for post in post_list %}
+                {% if post.TYPE == 'ticket' %}
+                    <li class="post_container">
+                        <div class="post_head">
+                            <p>{{ post.user.username }} asked for a review</p>
+                            <p>{{ post.time_created }}</p>
+                        </div>
+                        <div>
+                            <p class="">{{ post.title }}</h3>
+                            <p class="">{{ post.description }}</p>
+                            <img src="../media/{{ MEDIA_URL }}{{ post.image }}" alt="">
+                            {% if not post.HAS_REVIEW %}
+                                <a href="/review/create_review/{{ post.id }}"><button class="btn btn-create-review">Create review</button></a>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="post_container">
+                        <div class="post_head">
+                            <p>{{ post.user.username}} has posted a review </p>
+                            <p>{{ post.time_created }} </p>
+                        </div>
+                        <p>{{ post.headline }}</p>
+                        <p>{{ post.body }}</p>
+                        <div class="awnser_ticket_container">
+                            <p>Ticket - {{ post.ticket.user.username}}</p>
+                            <p>{{ post.ticket.description }}</p>
+                            <img src="../media/{{ MEDIA_URL }}{{ post.ticket.image }}" alt="">
+                        </div>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No ticket available</p>
+        {% endif %}
+    </div>
+    
+    
+</body>
+</html>

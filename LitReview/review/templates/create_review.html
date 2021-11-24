@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'LitReview/style.css' %}">
+    <title>Create review</title>
+</head>
+<body>
+    
+    <ul class='nav_container'>
+        <li class='puce_nav'><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li class='puce_nav'><a href="{% url 'my_post' %}">Post</a></li>
+        <li class='puce_nav'><a href="{% url 'subscription' %}">Subscription</a></li>
+        <li class='puce_nav'><a href="{% url 'logout_process' %}">Logout</a></li>
+    </ul>
+    <h1>Lit Review</h1>
+    {% if data.is_awsner %}
+        <div class="awnser_ticket_container">
+            <div class="post_head">
+                <p>Ticket - {{ data.username }}</p>
+                <p>{{ data.time_created }}</p>
+            </div>
+            <p>{{ data.title }}</p>
+            <p>{{ data.description }}</p>
+            <img src="../../media/{{ MEDIA_URL }}{{ data.image }}" alt="">
+        </div>
+    {% endif %}
+    <form method='POST' action="{% url 'create_review_process' data.ticket_id  %}" class='form_modify' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="btn submit">
+    </form>
+</body>
+</html>

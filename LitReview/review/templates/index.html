@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>login page</title>
+    <link rel="stylesheet" href="{% static 'LitReview/style.css' %}">
+</head>
+<body>
+    
+    <h1>LITReview</h1>
+    <section>
+        <div class="login_form">
+            <h3>Create an account</h3>
+            <a href="{% url 'sign_up' %}"><button class="btn-small">Sign up</button></a>
+        </div>
+        <div class="login_container">
+            <h3>Login</h3>
+            <form method="Post" action="{% url 'login_process' %}" class='login_form'>
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="btn-small" value="login">
+            </form>
+        </div>
+    </section>
+</body>
+</html>
