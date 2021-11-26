@@ -1,6 +1,7 @@
 # Lit Review
 
 This website was made to allow user to ask for and read review of a book.
+
 Moreover user can follow other users to see their last post.
 
 # Language used
