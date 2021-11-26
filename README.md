@@ -42,6 +42,6 @@ Intsall all the dependncies with one step with [pip](https://fr.wikipedia.org/wi
 
 # Execute the server
 
-This command should be execute in the JobBoard folder in order to start the server in localhost
+This command should be execute in the LitReview folder in order to start the server in localhost
 
     python manage.py runserver
